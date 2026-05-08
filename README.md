@@ -104,7 +104,19 @@ At 15 frames (375ms at 40fps), the model already exceeds the single-frame CNN's 
 
 All C++ latencies are well within a typical ECU real-time budget of 20-50 ms.
 
+### Benchmarking Environment
+
+| Component | Spec |
+|-----------|------|
+| CPU | Intel Core i9-13900H (14 cores, 24 threads) |
+| GPU | NVIDIA GeForce RTX 4060 Laptop 8GB |
+| OS | Windows 11 Home |
+| ONNX Runtime | 1.25.1 (CPU Execution Provider) |
+| C++ Compiler | MSVC 2022 (v143) |
+| PyTorch | 2.3.1+cu118 |
+
 ---
+
 
 ## Engineering Decisions
 
