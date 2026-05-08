@@ -1,0 +1,42 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+    outs:
+      - data/processed/
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - data/processed/
+      - src/model.py
+      - src/train.py
+      - src/dataset.py
+    params:
+      - train.lr
+      - train.batch_size
+      - train.epochs
+      - model.name
+      - model.n_classes
+      - data.source
+    outs:
+      - models/gesture_model.pth
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - models/gesture_model.pth
+      - src/evaluate.py
+    outs:
+      - reports/evaluation_report.md
+      - reports/confusion_matrix.png
+
+  export:
+    cmd: python src/export.py
+    deps:
+      - models/gesture_model.pth
+      - src/export.py
+    outs:
+      - models/gesture_model.onnx
+      - models/gesture_model_quant.onnx

@@ -1,0 +1,22 @@
+train:
+  lr: 0.001
+  batch_size: 32
+  epochs: 80
+  scheduler: cosine
+  weight_decay: 1.0e-4
+  label_smoothing: 0.05
+  early_stopping_patience: 10
+  warmup_epochs: 5
+model:
+  name: cnn
+  n_classes: 12
+  input_size: 32
+data:
+  source: soli
+  n_samples_per_class: 200
+  gesture_classes:
+    - swipe_left
+    - swipe_right
+    - tap
+    - hold
+    - dismiss
