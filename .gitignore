@@ -39,3 +39,4 @@ reports/
 
 # MLflow database
 mlflow.db
+REFERENCE.md
