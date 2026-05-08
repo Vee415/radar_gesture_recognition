@@ -15,9 +15,19 @@ add_executable(gesture_inference
     preprocessor.cpp
 )
 
+add_executable(streaming_inference
+    streaming_main.cpp
+    streaming_inference.cpp
+    preprocessor.cpp
+)
+
 target_include_directories(gesture_inference PRIVATE ${ORT_INCLUDE})
+target_include_directories(streaming_inference PRIVATE ${ORT_INCLUDE})
 
 target_link_libraries(gesture_inference
+    ${ORT_LIB}/onnxruntime.lib
+)
+target_link_libraries(streaming_inference
     ${ORT_LIB}/onnxruntime.lib
 )
 
@@ -29,4 +39,13 @@ add_custom_command(TARGET gesture_inference POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${ORT_LIB}/onnxruntime_providers_shared.dll"
         $<TARGET_FILE_DIR:gesture_inference>
+)
+
+add_custom_command(TARGET streaming_inference POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${ORT_LIB}/onnxruntime.dll"
+        $<TARGET_FILE_DIR:streaming_inference>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${ORT_LIB}/onnxruntime_providers_shared.dll"
+        $<TARGET_FILE_DIR:streaming_inference>
 )
