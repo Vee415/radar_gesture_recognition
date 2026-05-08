@@ -35,4 +35,7 @@ Thumbs.db
 reports/
 
 # DVC
-.dvc/config.localmlflow.db
+.dvc/config.local
+
+# MLflow database
+mlflow.db
