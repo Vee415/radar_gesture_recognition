@@ -7,5 +7,4 @@ onnx
 onnxscript
 onnxruntime
 h5py
-dvc
 matplotlib
