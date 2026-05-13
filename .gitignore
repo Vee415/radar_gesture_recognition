@@ -1,5 +1,6 @@
 # Python
 venv/
+venv_gpu/
 __pycache__/
 *.pyc
 *.pyo
