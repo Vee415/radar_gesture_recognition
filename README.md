@@ -3,21 +3,24 @@
 End-to-end ML pipeline for gesture classification on radar sensor data, targeting automotive ECU edge deployment via ONNX Runtime. Two models compared: a single-frame CNN baseline and a streaming CNN+LSTM that achieves **98.0% accuracy** by capturing temporal motion signatures.
 
 ```
-Raw Radar Data (Soli HDF5)
-        ↓
-  Preprocessing
-  - Single-frame: middle-frame extraction
-  - Temporal: resample to 40-frame sequences
-  - 4-channel range-doppler reshape (32x32)
-  - Min-max normalization per channel
-        ↓
+                 Raw Radar Data (Soli HDF5)
+                          ↓
+                   Preprocessing
+                          ↓
+  - Single-frame: middle      - Temporal: resample to 40-frame sequence
+    -frame extraction
+                          ↓
+             4-channel range-doppler reshape (32x32)
+                          ↓
+             Min-max normalization per channel
+              ↓                               ↓
   ┌─────────────────────┐    ┌──────────────────────────┐
-  │  Single-Frame CNN   │    │  Streaming CNN+LSTM       │
-  │  621K params        │    │  Per-frame CNN (shared)   │
-  │  82.2% accuracy      │    │  → LSTM (512 hidden)      │
-  │  0.089 ms/frame     │    │  → Accumulated softmax     │
-  │                     │    │  98.0% accuracy             │
-  │                     │    │  0.27 ms/frame (C++)       │
+  │  Single-Frame CNN   │    │  Streaming CNN+LSTM      │
+  │  621K params        │    │  Per-frame CNN (shared)  │
+  │  82.2% accuracy     │    │  → LSTM (512 hidden)     │
+  │  0.089 ms/frame     │    │  → Accumulated softmax   │
+  │                     │    │  98.0% accuracy          │
+  │                     │    │  0.27 ms/frame (C++)     │
   └─────────────────────┘    └──────────────────────────┘
         ↓                            ↓
   ONNX Export + Quantization   ONNX Split Export
